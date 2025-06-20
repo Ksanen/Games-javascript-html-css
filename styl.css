@@ -29,6 +29,16 @@ body {
     cursor: pointer;
 }
 
+.btn--start {
+    background-color: rgb(69, 203, 69);
+    width: 100px;
+    align-self: center;
+}
+
+.btn--start:hover {
+    background-color: rgb(57, 170, 57);
+}
+
 .btn--next {
     background-color: blue;
 }
@@ -53,12 +63,47 @@ body {
     background-color: rgb(41, 205, 41);
 }
 
+[page] {
+    padding: 10px;
+}
+
+[page="start"] {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .game {
     width: 500px;
     height: 500px;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 5px;
+}
+
+.board--small {
+    padding: 5px;
+    width: 150px;
+    height: 150px;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
+.start_header {
+    text-align: center;
+}
+
+.field {
+    background-color: green;
 }
 
 .page {

@@ -10,7 +10,25 @@
 
 <body>
     <div class="game">
-        <div page="start" class="page">1</div>
+        <div page="start" class="page">
+            <h1 class="start_header">Visual Memory</h1>
+            <div class="board board--small">
+                <div class="field"></div>
+                <div class="field"></div>
+                <div class="field"></div>
+                <div class="field"></div>
+                <div class="field"></div>
+                <div class="field"></div>
+                <div class="field"></div>
+                <div class="field"></div>
+                <div class="field"></div>
+            </div>
+            <p>
+                Na ekranie odkrywają się losowe prostokąty. Twoim zadaniem jest zapamiętać ich rozmieszczenie i wybrać
+                te, które się pojawiły. Wraz ze wzrostem poziomu rozmiar planszy może się zwiększyć.
+            </p>
+            <input type="button" value="start" class="btn btn--start">
+        </div>
         <div page="game" class="page page--invisible">2</div>
         <div page="game-over" class="page page--invisible">3</div>
         <div page="settings" class="page page--invisible">4</div>
