@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.game_buttons {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    padding: 5px;
+}
+
+.btn {
+    padding: 0.5rem;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    color: white;
+    cursor: pointer;
+}
+
+.btn--next {
+    background-color: blue;
+}
+
+.btn--next:hover {
+    background-color: rgb(33, 33, 239);
+}
+
+.btn--reset {
+    background-color: black;
+}
+
+.btn--reset:hover {
+    background-color: rgb(41, 40, 40);
+}
+
+.btn--settings {
+    background-color: green;
+}
+
+.btn--settings:hover {
+    background-color: rgb(41, 205, 41);
+}
+
+.game {
+    width: 500px;
+    height: 500px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.page {
+    background-color: yellow;
+    flex-grow: 1;
+}
+
+.page--invisibile {
+    display: none;
+}
+
+.buttons {
+    background-color: gray;
+}
