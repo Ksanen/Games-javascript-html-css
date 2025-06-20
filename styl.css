@@ -62,14 +62,13 @@ body {
 }
 
 .page {
-    background-color: yellow;
     flex-grow: 1;
 }
 
-.page--invisibile {
+.page--invisible {
     display: none;
 }
 
-.buttons {
+.game_buttons {
     background-color: gray;
 }
