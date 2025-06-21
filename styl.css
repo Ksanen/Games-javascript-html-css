@@ -150,6 +150,10 @@ body {
     background-color: blue;
 }
 
+.field--wrong {
+    background-color: gray;
+}
+
 .field--show {
     background-color: yellow;
 }

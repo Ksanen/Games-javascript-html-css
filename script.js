@@ -29,12 +29,22 @@ class VisualMemoryGame {
     nextRound() {
         this.ui.lockButton(this.ui.buttons.next);
         this.round++;
+        this.increaseDifficulty();
         this.unlockAllFields();
         this.ui.upgradeRoundCounter();
         this.ui.generateBoard(this.numberOfColumns, this.numberOfRows);
         this.selectRandomFields();
         this.ui.showingFieldAnimation();
         this.ui.lockBoard();
+    }
+    increaseDifficulty() {
+        if (this.round % 3 == 0) {
+            this.numberOfColumns++
+            this.numberOfRows++;
+        }
+        if (this.round % 2 == 0) {
+            this.numberOfFieldsToSelect += 2;
+        }
     }
     resetGame() {
         this.ui.changePage("start");
@@ -179,13 +189,14 @@ class EventManager {
     fieldHandler = (field) => {
         const fieldNumber = field.getAttribute("field-number");
         if (!this.app.fieldsThatAreBlocked.has(fieldNumber)) {
-            this.app.ui.selectField(field);
             this.app.fieldsThatAreBlocked.add(fieldNumber);
             const numberOfField = parseInt(field.getAttribute("field-number"));
             if (!this.app.fieldsToShow.has(numberOfField)) {
+                field.classList.add("field--wrong");
                 this.app.decreaseHearts();
             }
             else {
+                this.app.ui.selectField(field);
                 this.app.fieldsToShow.delete(numberOfField);
             }
             if (this.app.fieldsToShow.size === 0) {
