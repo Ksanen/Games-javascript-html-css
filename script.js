@@ -49,6 +49,7 @@ class VisualMemoryGame {
     resetGame = () => {
         this.ui.changePage("start");
         this.ui.unlockButton(this.ui.buttons.openSettings);
+        this.ui.lockButton(this.ui.buttons.next);
         this.round = 0;
         this.hearts = 3;
         this.resetBoard();
@@ -206,6 +207,7 @@ class EventManager {
             }
             if (this.app.fieldsToShow.size === 0) {
                 this.app.ui.unlockButton(this.app.ui.buttons.next);
+                this.app.ui.lockBoard();
             }
         }
     }
