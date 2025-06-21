@@ -10,7 +10,7 @@ class VisualMemoryGame {
         this.ui = new UIManager(this);
         this.event = new EventManager(this);
         this.round = 0;
-        this.hearts = 0;
+        this.hearts = 3;
         this.numberOfFieldsToSelect = 3;
         this.numberOfColumns = 5;
         this.numberOfRows = 5;
@@ -42,11 +42,18 @@ class VisualMemoryGame {
     }
     selectRandomFields() {
         const area = this.numberOfColumns * this.numberOfRows;
-
         while (this.fieldsToShow.size < this.numberOfFieldsToSelect) {
             let randomNumber = Math.floor(Math.random() * area);
             this.fieldsToShow.add(randomNumber);
         }
+    }
+    decreaseHearts() {
+        this.hearts--;
+        this.ui.upgradeHeartsCounter();
+        if (this.hearts === 0) {
+            this.ui.lockBoard();
+        }
+
     }
 
 }
@@ -127,7 +134,7 @@ class UIManager {
         this.showFields();
         const delayTimeToHide = this.app.animation.showFieldTime + this.app.animation.showFieldAnimationTime;
         const hideFieldsTimeout = setTimeout(this.hideFields, delayTimeToHide);
-        const unlockBoardTimeout = setTimeout(this.unlockBoard, delayTimeToHide + this.app.animation.showFieldAnimationTime);
+        const unlockBoardTimeout = setTimeout(this.unlockBoard, delayTimeToHide);
         this.timeouts.add(hideFieldsTimeout);
         this.timeouts.add(unlockBoardTimeout);
     }
@@ -169,6 +176,10 @@ class EventManager {
         if (!this.app.fieldsThatAreBlocked.has(fieldNumber)) {
             this.app.ui.selectField(field);
             this.app.fieldsThatAreBlocked.add(fieldNumber);
+            const numberOfField = parseInt(field.getAttribute("field-number"));
+            if (!this.app.fieldsToShow.has(numberOfField)) {
+                this.app.decreaseHearts();
+            }
         }
     }
 }
