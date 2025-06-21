@@ -6,6 +6,13 @@ class VisualMemoryGame {
     startGame() {
 
     }
+    nextRound() {
+
+    }
+    resetGame() {
+
+    }
+
 }
 class UIManager {
     constructor(app) {
@@ -39,11 +46,17 @@ class UIManager {
     showPage(page) {
         page.classList.remove("page--invisible");
     }
+    openSettings() {
+
+    }
 }
 class EventManager {
     constructor(app) {
         this.app = app;
-        this.app.ui.buttons.start.addEventListener("click", this.app.startGame.bind(this.app))
+        this.app.ui.buttons.start.addEventListener("click", this.app.startGame.bind(this.app));
+        this.app.ui.buttons.next.addEventListener("click", this.app.nextRound.bind(this.app));
+        this.app.ui.buttons.reset.addEventListener("click", this.app.resetGame.bind(this.app));
+        this.app.ui.buttons.openSettings.addEventListener("click", this.app.ui.openSettings.bind(this.app));
     }
 }
 const visual = new VisualMemoryGame();
