@@ -63,18 +63,18 @@ body {
     background-color: rgb(41, 205, 41);
 }
 
-[page] {
-    padding: 10px;
-}
+
 
 [page="start"] {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    text-align: justify;
+    justify-content: center;
 }
 
 .game {
-    width: 500px;
+    width: 450px;
     height: 500px;
     border: 1px solid black;
     display: flex;
@@ -107,7 +107,8 @@ body {
 }
 
 .page {
-    flex-grow: 1;
+    padding: 10px;
+    height: 450px;
 }
 
 .page--invisible {
@@ -116,4 +117,6 @@ body {
 
 .game_buttons {
     background-color: gray;
+    flex-grow: 1;
+    align-items: center;
 }

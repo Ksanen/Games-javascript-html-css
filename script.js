@@ -13,6 +13,12 @@ class UIManager {
             settings: document.querySelector(`[page="settings"`),
             start: document.querySelector(`[page="start"`)
         }
+        this.buttons = {
+            start: document.querySelector(".btn--start"),
+            next: document.querySelector(".btn--next"),
+            reset: document.querySelector(".btn--reset"),
+            openSettings: document.querySelector(".btn--settings")
+        }
     }
     changePage(newPage) {
         for (const page in this.pages) {
