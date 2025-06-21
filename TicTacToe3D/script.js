@@ -167,41 +167,47 @@ class Game {
         }
     }
     checkVictoryConditions(turn) {
-        for (let i = 0; i < 3; i++) {
-            let elementsHTML = this.layers[i].map((element) => element.elementHTML.innerHTML);
-            if (elementsHTML[0] === turn && elementsHTML[1] === turn && elementsHTML[2] === turn) {
-                this.points[turn]++;
-                this.ui.highlightWinnerFields([i, 0], [i, 1], [i, 2])
-                return true;
+        const layerRowCombos = [
+            [[0, 0], [0, 1], [0, 2]],
+            [[0, 5], [0, 6], [0, 7]],
+            [[0, 0], [0, 3], [0, 5]],
+            [[0, 2], [0, 4], [0, 7]],
+        ];
+        for (let layer = 0; layer < 3; layer++) {
+            for (const pattern of layerRowCombos) {
+                const combo = pattern.map(([_, col]) => [layer, col]);
+                if (combo.every(([l, c]) => this.layers[l][c].elementHTML.innerHTML === turn)) {
+                    this.points[turn]++;
+                    this.ui.highlightWinnerFields(...combo);
+                    return true;
+                }
             }
-            if (elementsHTML[5] === turn && elementsHTML[6] === turn && elementsHTML[7] === turn) {
+        }
+        for (let col = 0; col < 8; col++) {
+            const combo = [[0, col], [1, col], [2, col]];
+            if (combo.every(([l, c]) => this.layers[l][c].elementHTML.innerHTML === turn)) {
                 this.points[turn]++;
-                this.ui.highlightWinnerFields([i, 5], [i, 6], [i, 7])
-                return true;
-            }
-            if (elementsHTML[0] === turn && elementsHTML[3] === turn && elementsHTML[5] === turn) {
-                this.points[turn]++;
-                this.ui.highlightWinnerFields([i, 0], [i, 3], [i, 5])
-                return true;
-            }
-            if (elementsHTML[2] === turn && elementsHTML[4] === turn && elementsHTML[7] === turn) {
-                this.points[turn]++;
-                this.ui.highlightWinnerFields([i, 2], [i, 4], [i, 7])
+                this.ui.highlightWinnerFields(...combo);
                 return true;
             }
         }
-        for (let i = 0; i < 8; i++) {
-            let elementsHTML = [];
-            elementsHTML[0] = this.layers[0][i].elementHTML.innerHTML;
-            elementsHTML[1] = this.layers[1][i].elementHTML.innerHTML;
-            elementsHTML[2] = this.layers[2][i].elementHTML.innerHTML;
-            if (elementsHTML[0] === turn && elementsHTML[1] === turn && elementsHTML[2] === turn) {
+        const diagonalCombos = [
+            [[0, 0], [1, 1], [2, 2]],
+            [[2, 0], [1, 1], [0, 2]],
+            [[0, 5], [1, 6], [2, 7]],
+            [[0, 7], [1, 6], [2, 5]],
+            [[0, 7], [1, 4], [2, 2]],
+            [[0, 2], [1, 4], [2, 7]],
+            [[0, 0], [1, 3], [2, 5]],
+            [[0, 5], [1, 3], [2, 0]],
+        ];
+        for (const combo of diagonalCombos) {
+            if (combo.every(([l, c]) => this.layers[l][c].elementHTML.innerHTML === turn)) {
                 this.points[turn]++;
-                this.ui.highlightWinnerFields([0, i], [1, i], [2, i])
+                this.ui.highlightWinnerFields(...combo);
                 return true;
             }
         }
-
         return false;
     }
 
