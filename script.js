@@ -27,13 +27,21 @@ class VisualMemoryGame {
         this.ui.lockBoard();
     }
     nextRound() {
+        this.ui.lockButton(this.ui.buttons.next);
         this.round++;
+        this.unlockAllFields();
+        this.ui.upgradeRoundCounter();
+        this.ui.generateBoard(this.numberOfColumns, this.numberOfRows);
+        this.selectRandomFields();
+        this.ui.showingFieldAnimation();
+        this.ui.lockBoard();
     }
     resetGame() {
         this.ui.changePage("start");
         this.ui.unlockButton(this.ui.buttons.next);
         this.ui.unlockButton(this.ui.buttons.openSettings);
         this.round = 0;
+        this.hearts = 3;
         this.unlockAllFields();
         this.ui.clearTimeouts();
     }
@@ -176,6 +184,12 @@ class EventManager {
             const numberOfField = parseInt(field.getAttribute("field-number"));
             if (!this.app.fieldsToShow.has(numberOfField)) {
                 this.app.decreaseHearts();
+            }
+            else {
+                this.app.fieldsToShow.delete(numberOfField);
+            }
+            if (this.app.fieldsToShow.size === 0) {
+                this.app.ui.unlockButton(this.app.ui.buttons.next);
             }
         }
     }
