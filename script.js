@@ -3,6 +3,9 @@ class VisualMemoryGame {
         this.ui = new UIManager(this);
         this.event = new EventManager(this);
         this.round = 0;
+        this.hearts = 0;
+        this.ui.upgradeHeartsCounter();
+        this.ui.upgradeRoundCounter();
         this.numberOfColumns = 5;
         this.numberOfRows = 5;
     }
@@ -40,6 +43,8 @@ class UIManager {
             openSettings: document.querySelector(".btn--settings")
         }
         this.board = this.pages.game.querySelector(".game_board");
+        this.roundCounter = document.getElementById("roundCounter");
+        this.hearts = document.getElementById("hearts");
     }
     changePage(newPage) {
         for (const page in this.pages) {
@@ -50,6 +55,12 @@ class UIManager {
                 this.hidePage(this.pages[page]);
             }
         }
+    }
+    upgradeRoundCounter() {
+        this.roundCounter.innerHTML = `Round: ${this.app.round}`;
+    }
+    upgradeHeartsCounter() {
+        this.hearts.innerHTML = `Hearts: ${this.app.hearts}`;
     }
     selectField(field) {
         field.classList.add("field--selected");
