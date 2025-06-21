@@ -1,7 +1,12 @@
 class VisualMemoryGame {
     constructor() {
         this.fieldsThatAreBlocked = new Set();
-        this.selectedFields = new Set();
+        this.fieldsToShow = new Set();
+        this.animation = {
+            showFieldDelay: 1000,
+            showFieldAnimationTime: 500,
+            showFieldTime: 2000
+        }
         this.ui = new UIManager(this);
         this.event = new EventManager(this);
         this.round = 0;
@@ -11,14 +16,16 @@ class VisualMemoryGame {
         this.ui.upgradeRoundCounter();
         this.numberOfColumns = 5;
         this.numberOfRows = 5;
-        this.selectRandomFields();
+
     }
     startGame() {
         this.ui.changePage("game");
         this.ui.lockButton(this.ui.buttons.next);
         this.ui.lockButton(this.ui.buttons.openSettings);
         this.ui.generateBoard(this.numberOfColumns, this.numberOfRows);
-        // this.ui.lockBoard();
+        this.selectRandomFields();
+        this.ui.showingFieldAnimation();
+        this.ui.lockBoard();
     }
     nextRound() {
         this.round++;
@@ -35,11 +42,11 @@ class VisualMemoryGame {
     }
     selectRandomFields() {
         const area = this.numberOfColumns * this.numberOfRows;
-        while (this.selectedFields.size < this.numberOfFieldsToSelect) {
+
+        while (this.fieldsToShow.size < this.numberOfFieldsToSelect) {
             let randomNumber = Math.floor(Math.random() * area);
-            this.selectedFields.add(randomNumber);
+            this.fieldsToShow.add(randomNumber);
         }
-        console.log(this.selectedFields);
     }
 
 }
@@ -90,16 +97,16 @@ class UIManager {
     openSettings() {
         this.ui.changePage("settings");
     }
-    lockButton(button) {
+    lockButton = (button) => {
         button.classList.add("btn--locked")
     }
-    unlockButton(button) {
+    unlockButton = (button) => {
         button.classList.remove("btn--locked")
     }
-    lockBoard() {
+    lockBoard = () => {
         this.board.classList.add("game_board--locked");
     }
-    unlockBoard() {
+    unlockBoard = () => {
         this.board.classList.remove("game_board--locked");
     }
     generateBoard(columns, rows) {
@@ -111,8 +118,27 @@ class UIManager {
             const field = document.createElement("div");
             field.setAttribute("field-number", i);
             field.classList.add("field");
+            field.style.transition = `all ${this.app.animation.showFieldAnimationTime}ms ease`;
             this.board.appendChild(field);
         }
+    }
+    showingFieldAnimation = () => {
+        this.showFields();
+        const delayTimeToHide = this.app.animation.showFieldTime + this.app.animation.showFieldAnimationTime;
+        setTimeout(this.hideFields, delayTimeToHide);
+        setTimeout(this.unlockBoard, delayTimeToHide + this.app.animation.showFieldAnimationTime);
+    }
+    showFields = () => {
+        setTimeout(() => {
+            this.app.fieldsToShow.forEach((fieldToShow) => {
+                this.board.querySelector(`[field-number="${fieldToShow}"]`).classList.add("field--show")
+            })
+        }, this.app.animation.showFieldDelay)
+    }
+    hideFields = () => {
+        this.app.fieldsToShow.forEach((fieldToShow) => {
+            this.board.querySelector(`[field-number="${fieldToShow}"]`).classList.remove("field--show")
+        })
     }
 }
 class EventManager {

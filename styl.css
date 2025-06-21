@@ -143,11 +143,15 @@ body {
 
 .field {
     background-color: var(--fieldBgColor);
-    transition: all 250ms ease;
+    cursor: pointer;
 }
 
 .field--selected {
     background-color: blue;
+}
+
+.field--show {
+    background-color: yellow;
 }
 
 .page {
