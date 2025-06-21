@@ -186,3 +186,17 @@ body {
     flex-grow: 1;
     align-items: center;
 }
+
+.settings-option {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
+    padding: 10px;
+    align-items: center;
+}
+
+.settings-option__select {
+    border: none;
+    outline: 1px solid green;
+    padding: 5px;
+}

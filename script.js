@@ -183,7 +183,7 @@ class EventManager {
         this.app.ui.buttons.start.addEventListener("click", this.app.startGame.bind(this.app));
         this.app.ui.buttons.next.addEventListener("click", this.app.nextRound.bind(this.app));
         this.app.ui.buttons.reset.addEventListener("click", this.app.resetGame.bind(this.app));
-        this.app.ui.buttons.openSettings.addEventListener("click", () => this.app.ui.changePage("settings").bind(this.app));
+        this.app.ui.buttons.openSettings.addEventListener("click", () => this.app.ui.changePage("settings"));
         this.app.ui.board.addEventListener("click", this.boardHandler.bind(this))
     }
     boardHandler = (e) => {
