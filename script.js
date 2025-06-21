@@ -12,11 +12,10 @@ class VisualMemoryGame {
         this.round = 0;
         this.hearts = 0;
         this.numberOfFieldsToSelect = 3;
-        this.ui.upgradeHeartsCounter();
-        this.ui.upgradeRoundCounter();
         this.numberOfColumns = 5;
         this.numberOfRows = 5;
-
+        this.ui.upgradeHeartsCounter();
+        this.ui.upgradeRoundCounter();
     }
     startGame() {
         this.ui.changePage("game");
@@ -36,6 +35,7 @@ class VisualMemoryGame {
         this.ui.unlockButton(this.ui.buttons.openSettings);
         this.round = 0;
         this.unlockAllFields();
+        this.ui.clearTimeouts();
     }
     unlockAllFields() {
         this.fieldsThatAreBlocked.clear();
@@ -68,6 +68,7 @@ class UIManager {
         this.board = this.pages.game.querySelector(".game_board");
         this.roundCounter = document.getElementById("roundCounter");
         this.hearts = document.getElementById("hearts");
+        this.timeouts = new Set();
     }
     changePage(newPage) {
         for (const page in this.pages) {
@@ -125,20 +126,27 @@ class UIManager {
     showingFieldAnimation = () => {
         this.showFields();
         const delayTimeToHide = this.app.animation.showFieldTime + this.app.animation.showFieldAnimationTime;
-        setTimeout(this.hideFields, delayTimeToHide);
-        setTimeout(this.unlockBoard, delayTimeToHide + this.app.animation.showFieldAnimationTime);
+        const hideFieldsTimeout = setTimeout(this.hideFields, delayTimeToHide);
+        const unlockBoardTimeout = setTimeout(this.unlockBoard, delayTimeToHide + this.app.animation.showFieldAnimationTime);
+        this.timeouts.add(hideFieldsTimeout);
+        this.timeouts.add(unlockBoardTimeout);
     }
     showFields = () => {
-        setTimeout(() => {
+        const showFieldTimeout = setTimeout(() => {
             this.app.fieldsToShow.forEach((fieldToShow) => {
                 this.board.querySelector(`[field-number="${fieldToShow}"]`).classList.add("field--show")
             })
         }, this.app.animation.showFieldDelay)
+        this.timeouts.add(showFieldTimeout);
     }
     hideFields = () => {
         this.app.fieldsToShow.forEach((fieldToShow) => {
             this.board.querySelector(`[field-number="${fieldToShow}"]`).classList.remove("field--show")
         })
+    }
+    clearTimeouts = () => {
+        this.timeouts.forEach(timeout => clearTimeout(timeout));
+        this.timeouts.clear();
     }
 }
 class EventManager {
