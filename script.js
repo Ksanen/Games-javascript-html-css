@@ -4,7 +4,7 @@ class VisualMemoryGame {
         this.event = new EventManager(this);
     }
     startGame() {
-
+        this.ui.changePage("game");
     }
     nextRound() {
 
@@ -18,9 +18,9 @@ class UIManager {
     constructor(app) {
         this.app = app;
         this.pages = {
-            game: document.querySelector(`[page="game]"`),
-            gameOver: document.querySelector(`[page="game-over]"`),
-            settings: document.querySelector(`[page="settings]"`),
+            game: document.querySelector(`[page="game"]`),
+            gameOver: document.querySelector(`[page="game-over"]`),
+            settings: document.querySelector(`[page="settings"]`),
             start: document.querySelector(`[page="start"]`)
         }
         this.buttons = {

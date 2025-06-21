@@ -73,6 +73,10 @@ body {
     justify-content: center;
 }
 
+[page="game"] {
+    display: grid;
+}
+
 .game {
     width: 450px;
     height: 500px;
