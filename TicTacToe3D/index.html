@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styl.css">
+</head>
+
+<body>
+    <div class="container">
+
+
+        <div class="result-container">
+            <h1>Ruch: <span class="turn"></span></h1>
+            <h2>Wynik: <span class="O">O</span> <span class="result">: 0 - 0 : </span><span class="X">X</span></h2>
+            <h2 id="winner"></h2>
+        </div>
+        <div class="box">
+            <div class="layer-container layer-container-1">
+                <div class="layer-box">
+                    <div class="layer layer-front">
+                    </div>
+                    <div class="layer layer-left"></div>
+                    <div class="layer layer-right"></div>
+                    <div class="layer layer-bottom"></div>
+                    <div class="layer layer-back"></div>
+                    <div class="layer layer-top">
+                        <div class="field"></div>
+                        <div class="field"></div>
+                        <div class="field"></div>
+                        <div class="field"></div>
+                        <div class="field--inactive"></div>
+                        <div class="field"></div>
+                        <div class="field"></div>
+                        <div class="field"></div>
+                        <div class="field"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="layer-container layer-container-2">
+                <div class="layer-box">
+                    <div class="layer layer-front">
+                    </div>
+                    <div class="layer layer-left"></div>
+                    <div class="layer layer-right"></div>
+                    <div class="layer layer-bottom"></div>
+                    <div class="layer layer-back"></div>
+                    <div class="layer layer-top">
+                        <div class="field"></div>
+                        <div class="field"></div>
+                        <div class="field"></div>
+                        <div class="field"></div>
+                        <div class="field--inactive"></div>
+                        <div class="field"></div>
+                        <div class="field"></div>
+                        <div class="field"></div>
+                        <div class="field"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="layer-container layer-container-3">
+                <div class="layer-box">
+                    <div class="layer layer-front">
+                    </div>
+                    <div class="layer layer-left"></div>
+                    <div class="layer layer-right"></div>
+                    <div class="layer layer-bottom"></div>
+                    <div class="layer layer-back"></div>
+                    <div class="layer layer-top">
+                        <div class="field"></div>
+                        <div class="field"></div>
+                        <div class="field"></div>
+                        <div class="field"></div>
+                        <div class="field--inactive"></div>
+                        <div class="field"></div>
+                        <div class="field"></div>
+                        <div class="field"></div>
+                        <div class="field"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="buttons">
+            <input type="button" class="btn next-btn btn--disactive" value="next round"><input type="button"
+                class="btn reset-btn" value="reset">
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
