@@ -2,15 +2,21 @@ class VisualMemoryGame {
     constructor() {
         this.ui = new UIManager(this);
         this.event = new EventManager(this);
+        this.round = 0;
     }
     startGame() {
         this.ui.changePage("game");
+        this.ui.lockButton(this.ui.buttons.next);
+        this.ui.lockButton(this.ui.buttons.openSettings);
     }
     nextRound() {
-
+        this.round++;
     }
     resetGame() {
-
+        this.ui.changePage("start");
+        this.ui.unlockButton(this.ui.buttons.next);
+        this.ui.unlockButton(this.ui.buttons.openSettings);
+        this.round = 0;
     }
 
 }
@@ -47,8 +53,15 @@ class UIManager {
         page.classList.remove("page--invisible");
     }
     openSettings() {
-
+        this.ui.changePage("settings");
     }
+    lockButton(button) {
+        button.classList.add("btn--locked")
+    }
+    unlockButton(button) {
+        button.classList.remove("btn--locked")
+    }
+
 }
 class EventManager {
     constructor(app) {

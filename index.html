@@ -10,6 +10,10 @@
 
 <body>
     <div class="game">
+        <div class="game_info">
+            <p id="roundCounter">0</p>
+            <p id="hearts">Hearts: 3</p>
+        </div>
         <div page="start" class="page">
             <h1 class="start_header">Visual Memory</h1>
             <div class="board board--small">
@@ -29,9 +33,9 @@
             </p>
             <input type="button" value="start" class="btn btn--start">
         </div>
-        <div page="game" class="page page--invisible">2</div>
-        <div page="game-over" class="page page--invisible">3</div>
-        <div page="settings" class="page page--invisible">4</div>
+        <div page="game" class="page page--invisible"></div>
+        <div page="game-over" class="page page--invisible"></div>
+        <div page="settings" class="page page--invisible"></div>
         <div class="game_buttons">
             <input type="button" value="next" class="btn btn--next">
             <input type="button" value="reset" class="btn btn--reset">

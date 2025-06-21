@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+:root {
+    --gameBgColor: rgb(145, 232, 145);
+    --fieldBgColor: green;
+}
+
 body {
     height: 100vh;
     display: flex;
@@ -11,7 +16,12 @@ body {
     align-items: center;
 }
 
-
+.game_info {
+    flex-grow: 1;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+}
 
 .game_buttons {
     display: flex;
@@ -27,6 +37,13 @@ body {
     outline: none;
     color: white;
     cursor: pointer;
+    transition: all 250ms ease;
+}
+
+.btn.btn--locked {
+    background-color: rgb(184, 181, 181);
+    color: black;
+    pointer-events: none;
 }
 
 .btn--start {
@@ -75,10 +92,11 @@ body {
 
 [page="game"] {
     display: grid;
+    background-color: var(--gameBgColor);
 }
 
 .game {
-    width: 450px;
+    width: 400px;
     height: 500px;
     border: 1px solid black;
     display: flex;
@@ -92,6 +110,7 @@ body {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 5px;
+    background-color: var(--gameBgColor);
 }
 
 .board--small {
@@ -107,12 +126,12 @@ body {
 }
 
 .field {
-    background-color: green;
+    background-color: var(--fieldBgColor);
 }
 
 .page {
     padding: 10px;
-    height: 450px;
+    height: 400px;
 }
 
 .page--invisible {
