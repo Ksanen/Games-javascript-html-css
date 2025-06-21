@@ -54,6 +54,7 @@ class VisualMemoryGame {
         this.hearts = 3;
         this.unlockAllFields();
         this.ui.clearTimeouts();
+        document.querySelector(`[page="game"]`).classList.remove("game--lose")
     }
     unlockAllFields() {
         this.fieldsThatAreBlocked.clear();
@@ -70,8 +71,8 @@ class VisualMemoryGame {
         this.ui.upgradeHeartsCounter();
         if (this.hearts === 0) {
             this.ui.lockBoard();
+            document.querySelector(`[page="game"]`).classList.add("game--lose")
         }
-
     }
 
 }

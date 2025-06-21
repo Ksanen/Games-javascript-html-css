@@ -90,12 +90,18 @@ body {
     gap: 10px;
     text-align: justify;
     justify-content: center;
+    background-color: rgb(84, 72, 72);
+    color: white;
 }
 
 [page="game"] {
     background-color: var(--mainBgColor);
     display: flex;
     flex-direction: column;
+}
+
+[page="game"].game--lose {
+    background-color: red;
 }
 
 .game {
@@ -108,11 +114,12 @@ body {
     overflow: hidden;
 }
 
+
 .game_board,
 .board {
     display: grid;
-    background-color: var(--gameBgColor);
 }
+
 
 .game_board {
     flex-grow: 1;
@@ -120,6 +127,7 @@ body {
     border-radius: 12px;
     padding: 10px;
     gap: 10px;
+    background-color: var(--gameBgColor);
 }
 
 .game_board--locked {
@@ -128,6 +136,7 @@ body {
 
 .board {
     padding: 5px;
+    background-color: var(--gameBgColor);
     gap: 5px;
     width: 150px;
     height: 150px;
