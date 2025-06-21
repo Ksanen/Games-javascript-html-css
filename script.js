@@ -11,6 +11,7 @@ class VisualMemoryGame {
         this.ui.lockButton(this.ui.buttons.next);
         this.ui.lockButton(this.ui.buttons.openSettings);
         this.ui.generateBoard(this.numberOfColumns, this.numberOfRows);
+        this.ui.lockBoard();
     }
     nextRound() {
         this.round++;
@@ -50,6 +51,9 @@ class UIManager {
             }
         }
     }
+    selectField(field) {
+        field.classList.add("field--selected");
+    }
     hidePage(page) {
         page.classList.add("page--invisible");
     }
@@ -65,6 +69,12 @@ class UIManager {
     unlockButton(button) {
         button.classList.remove("btn--locked")
     }
+    lockBoard() {
+        this.board.classList.add("game_board--locked");
+    }
+    unlockBoard() {
+        this.board.classList.remove("game_board--locked");
+    }
     generateBoard(columns, rows) {
         this.board.innerHTML = "";
         this.board.style.gridTemplateColumns = `repeat(${columns},1fr)`;
@@ -72,6 +82,7 @@ class UIManager {
         const area = columns * rows;
         for (let i = 0; i < area; i++) {
             const field = document.createElement("div");
+            field.setAttribute("field-number", i);
             field.classList.add("field");
             this.board.appendChild(field);
         }
@@ -84,6 +95,16 @@ class EventManager {
         this.app.ui.buttons.next.addEventListener("click", this.app.nextRound.bind(this.app));
         this.app.ui.buttons.reset.addEventListener("click", this.app.resetGame.bind(this.app));
         this.app.ui.buttons.openSettings.addEventListener("click", this.app.ui.openSettings.bind(this.app));
+        this.app.ui.board.addEventListener("click", this.boardHandler)
+    }
+    boardHandler(e) {
+        const field = e.target.closest(".field");
+        if (field) {
+            this.fieldHandler(field);
+        }
+    }
+    fieldHandler(field) {
+        this.app.ui.selectField(field);
     }
 }
 const visual = new VisualMemoryGame();
