@@ -1,5 +1,6 @@
 class VisualMemoryGame {
     constructor() {
+        this.fieldsThatAreBlocked = new Set();
         this.ui = new UIManager(this);
         this.event = new EventManager(this);
         this.round = 0;
@@ -8,13 +9,14 @@ class VisualMemoryGame {
         this.ui.upgradeRoundCounter();
         this.numberOfColumns = 5;
         this.numberOfRows = 5;
+
     }
     startGame() {
         this.ui.changePage("game");
         this.ui.lockButton(this.ui.buttons.next);
         this.ui.lockButton(this.ui.buttons.openSettings);
         this.ui.generateBoard(this.numberOfColumns, this.numberOfRows);
-        this.ui.lockBoard();
+        // this.ui.lockBoard();
     }
     nextRound() {
         this.round++;
@@ -24,6 +26,9 @@ class VisualMemoryGame {
         this.ui.unlockButton(this.ui.buttons.next);
         this.ui.unlockButton(this.ui.buttons.openSettings);
         this.round = 0;
+    }
+    unlockAllFields() {
+        this.fieldsThatAreBlocked.clear();
     }
 
 }
@@ -106,16 +111,20 @@ class EventManager {
         this.app.ui.buttons.next.addEventListener("click", this.app.nextRound.bind(this.app));
         this.app.ui.buttons.reset.addEventListener("click", this.app.resetGame.bind(this.app));
         this.app.ui.buttons.openSettings.addEventListener("click", this.app.ui.openSettings.bind(this.app));
-        this.app.ui.board.addEventListener("click", this.boardHandler)
+        this.app.ui.board.addEventListener("click", this.boardHandler.bind(this))
     }
-    boardHandler(e) {
+    boardHandler = (e) => {
         const field = e.target.closest(".field");
         if (field) {
             this.fieldHandler(field);
         }
     }
-    fieldHandler(field) {
-        this.app.ui.selectField(field);
+    fieldHandler = (field) => {
+        const fieldNumber = field.getAttribute("field-number");
+        if (!this.app.fieldsThatAreBlocked.has(fieldNumber)) {
+            this.app.ui.selectField(field);
+            this.app.fieldsThatAreBlocked.add(fieldNumber);
+        }
     }
 }
 const visual = new VisualMemoryGame();
