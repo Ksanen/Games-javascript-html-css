@@ -1,15 +1,17 @@
 class VisualMemoryGame {
     constructor() {
         this.fieldsThatAreBlocked = new Set();
+        this.selectedFields = new Set();
         this.ui = new UIManager(this);
         this.event = new EventManager(this);
         this.round = 0;
         this.hearts = 0;
+        this.numberOfFieldsToSelect = 3;
         this.ui.upgradeHeartsCounter();
         this.ui.upgradeRoundCounter();
         this.numberOfColumns = 5;
         this.numberOfRows = 5;
-
+        this.selectRandomFields();
     }
     startGame() {
         this.ui.changePage("game");
@@ -26,9 +28,18 @@ class VisualMemoryGame {
         this.ui.unlockButton(this.ui.buttons.next);
         this.ui.unlockButton(this.ui.buttons.openSettings);
         this.round = 0;
+        this.unlockAllFields();
     }
     unlockAllFields() {
         this.fieldsThatAreBlocked.clear();
+    }
+    selectRandomFields() {
+        const area = this.numberOfColumns * this.numberOfRows;
+        while (this.selectedFields.size < this.numberOfFieldsToSelect) {
+            let randomNumber = Math.floor(Math.random() * area);
+            this.selectedFields.add(randomNumber);
+        }
+        console.log(this.selectedFields);
     }
 
 }
