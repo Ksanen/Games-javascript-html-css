@@ -108,23 +108,23 @@ body {
     overflow: hidden;
 }
 
+.game_board,
+.board {
+    display: grid;
+    background-color: var(--gameBgColor);
+}
+
 .game_board {
     flex-grow: 1;
     height: 350px;
     border-radius: 12px;
+    padding: 10px;
+    gap: 10px;
 }
 
-.game_board,
 .board {
     padding: 5px;
-    display: grid;
     gap: 5px;
-    background-color: var(--gameBgColor);
-}
-
-
-
-.board {
     width: 150px;
     height: 150px;
     border: 1px solid black;

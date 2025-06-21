@@ -10,7 +10,7 @@ class VisualMemoryGame {
         this.ui.changePage("game");
         this.ui.lockButton(this.ui.buttons.next);
         this.ui.lockButton(this.ui.buttons.openSettings);
-        this.generateBoard(this.numberOfColumns, this.numberOfRows);
+        this.ui.generateBoard(this.numberOfColumns, this.numberOfRows);
     }
     nextRound() {
         this.round++;
@@ -26,7 +26,6 @@ class VisualMemoryGame {
 class UIManager {
     constructor(app) {
         this.app = app;
-
         this.pages = {
             game: document.querySelector(`[page="game"]`),
             gameOver: document.querySelector(`[page="game-over"]`),
@@ -39,6 +38,7 @@ class UIManager {
             reset: document.querySelector(".btn--reset"),
             openSettings: document.querySelector(".btn--settings")
         }
+        this.board = this.pages.game.querySelector(".game_board");
     }
     changePage(newPage) {
         for (const page in this.pages) {
@@ -66,8 +66,15 @@ class UIManager {
         button.classList.remove("btn--locked")
     }
     generateBoard(columns, rows) {
-        const field = document.createElement("div");
-        field.classList.add("field");
+        this.board.innerHTML = "";
+        this.board.style.gridTemplateColumns = `repeat(${columns},1fr)`;
+        this.board.style.gridTemplatRows = `repeat(${rows},1fr)`;
+        const area = columns * rows;
+        for (let i = 0; i < area; i++) {
+            const field = document.createElement("div");
+            field.classList.add("field");
+            this.board.appendChild(field);
+        }
     }
 }
 class EventManager {
