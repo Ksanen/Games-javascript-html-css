@@ -17,14 +17,17 @@ class VisualMemoryGame {
         this.ui.upgradeHeartsCounter();
         this.ui.upgradeRoundCounter();
     }
-    startGame() {
-        this.ui.changePage("game");
-        this.ui.lockButton(this.ui.buttons.next);
-        this.ui.lockButton(this.ui.buttons.openSettings);
+    prepareBoard() {
         this.ui.generateBoard(this.numberOfColumns, this.numberOfRows);
         this.selectRandomFields();
         this.ui.showingFieldAnimation();
         this.ui.lockBoard();
+    }
+    startGame() {
+        this.prepareBoard();
+        this.ui.changePage("game");
+        this.ui.lockButton(this.ui.buttons.next);
+        this.ui.lockButton(this.ui.buttons.openSettings);
     }
     nextRound() {
         this.ui.lockButton(this.ui.buttons.next);
@@ -32,10 +35,7 @@ class VisualMemoryGame {
         this.increaseDifficulty();
         this.unlockAllFields();
         this.ui.upgradeRoundCounter();
-        this.ui.generateBoard(this.numberOfColumns, this.numberOfRows);
-        this.selectRandomFields();
-        this.ui.showingFieldAnimation();
-        this.ui.lockBoard();
+        this.prepareBoard();
     }
     increaseDifficulty() {
         if (this.round % 3 == 0) {
@@ -46,12 +46,16 @@ class VisualMemoryGame {
             this.numberOfFieldsToSelect += 2;
         }
     }
-    resetGame() {
+    resetGame = () => {
         this.ui.changePage("start");
-        this.ui.unlockButton(this.ui.buttons.next);
         this.ui.unlockButton(this.ui.buttons.openSettings);
         this.round = 0;
         this.hearts = 3;
+        this.resetBoard();
+    }
+    resetBoard = () => {
+        this.ui.upgradeHeartsCounter();
+        this.ui.upgradeRoundCounter();
         this.unlockAllFields();
         this.ui.clearTimeouts();
         document.querySelector(`[page="game"]`).classList.remove("game--lose")
