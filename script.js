@@ -3,11 +3,14 @@ class VisualMemoryGame {
         this.ui = new UIManager(this);
         this.event = new EventManager(this);
         this.round = 0;
+        this.numberOfColumns = 5;
+        this.numberOfRows = 5;
     }
     startGame() {
         this.ui.changePage("game");
         this.ui.lockButton(this.ui.buttons.next);
         this.ui.lockButton(this.ui.buttons.openSettings);
+        this.generateBoard(this.numberOfColumns, this.numberOfRows);
     }
     nextRound() {
         this.round++;
@@ -23,6 +26,7 @@ class VisualMemoryGame {
 class UIManager {
     constructor(app) {
         this.app = app;
+
         this.pages = {
             game: document.querySelector(`[page="game"]`),
             gameOver: document.querySelector(`[page="game-over"]`),
@@ -61,7 +65,10 @@ class UIManager {
     unlockButton(button) {
         button.classList.remove("btn--locked")
     }
-
+    generateBoard(columns, rows) {
+        const field = document.createElement("div");
+        field.classList.add("field");
+    }
 }
 class EventManager {
     constructor(app) {

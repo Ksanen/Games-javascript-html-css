@@ -5,6 +5,7 @@
 }
 
 :root {
+    --mainBgColor: rgb(201, 224, 201);
     --gameBgColor: rgb(145, 232, 145);
     --fieldBgColor: green;
 }
@@ -21,6 +22,7 @@ body {
     padding: 5px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .game_buttons {
@@ -91,12 +93,13 @@ body {
 }
 
 [page="game"] {
-    display: grid;
-    background-color: var(--gameBgColor);
+    background-color: var(--mainBgColor);
+    display: flex;
+    flex-direction: column;
 }
 
 .game {
-    width: 400px;
+    width: 500px;
     height: 500px;
     border: 1px solid black;
     display: flex;
@@ -105,20 +108,29 @@ body {
     overflow: hidden;
 }
 
+.game_board {
+    flex-grow: 1;
+    height: 350px;
+    border-radius: 12px;
+}
+
+.game_board,
 .board {
+    padding: 5px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
     gap: 5px;
     background-color: var(--gameBgColor);
 }
 
-.board--small {
-    padding: 5px;
+
+
+.board {
     width: 150px;
     height: 150px;
     border: 1px solid black;
     margin: 0 auto;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
 }
 
 .start_header {
@@ -131,7 +143,7 @@ body {
 
 .page {
     padding: 10px;
-    height: 400px;
+    height: 450px;
 }
 
 .page--invisible {
