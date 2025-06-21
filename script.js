@@ -3,15 +3,18 @@ class VisualMemoryGame {
         this.ui = new UIManager(this);
         this.event = new EventManager(this);
     }
+    startGame() {
+
+    }
 }
 class UIManager {
     constructor(app) {
         this.app = app;
         this.pages = {
-            game: document.querySelector(`[page="game"`),
-            gameOver: document.querySelector(`[page="game-over"`),
-            settings: document.querySelector(`[page="settings"`),
-            start: document.querySelector(`[page="start"`)
+            game: document.querySelector(`[page="game]"`),
+            gameOver: document.querySelector(`[page="game-over]"`),
+            settings: document.querySelector(`[page="settings]"`),
+            start: document.querySelector(`[page="start"]`)
         }
         this.buttons = {
             start: document.querySelector(".btn--start"),
@@ -40,6 +43,7 @@ class UIManager {
 class EventManager {
     constructor(app) {
         this.app = app;
+        this.app.ui.buttons.start.addEventListener("click", this.app.startGame.bind(this.app))
     }
 }
 const visual = new VisualMemoryGame();
