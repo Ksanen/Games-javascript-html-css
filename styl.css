@@ -8,6 +8,7 @@
     --mainBgColor: rgb(201, 224, 201);
     --gameBgColor: rgb(145, 232, 145);
     --fieldBgColor: green;
+    --fieldBgHoverColor: rgb(15, 173, 15);
 }
 
 body {
@@ -153,6 +154,10 @@ body {
 .field {
     background-color: var(--fieldBgColor);
     cursor: pointer;
+}
+
+.field:hover:not(.field--selected, .field--wrong) {
+    background-color: var(--fieldBgHoverColor);
 }
 
 .field--selected {
