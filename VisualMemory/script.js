@@ -12,8 +12,8 @@ class VisualMemoryGame {
         this.defaultSettings = {
             hearts: 3,
             numberOfFieldsToSelect: 3,
-            numberOfRows: 3,
-            numberOfColumns: 3,
+            numberOfRows: 4,
+            numberOfColumns: 4,
             increaseDifficultyBoolean: true
         };
         this.settings = {
@@ -56,7 +56,7 @@ class VisualMemoryGame {
             this.settings.numberOfRows++;
         }
         if (this.round % 2 == 0) {
-            this.numberOfFieldsToSelect += 2;
+            this.settings.numberOfFieldsToSelect += 2;
         }
     }
     resetGame = () => {
