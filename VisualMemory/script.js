@@ -100,10 +100,11 @@ class UIManager {
             openSettings: document.querySelector(".btn--settings"),
             closeSettings: document.querySelector(".btn--close-settings")
         }
-        this.board = this.pages.game.querySelector(".game_board");
+        this.board = this.pages.game.querySelector(".game__board");
         this.roundCounter = document.getElementById("roundCounter");
         this.hearts = document.getElementById("hearts");
         this.timeouts = new Set();
+        this.adjustSizeOfBoard();
     }
     changePage(newPage) {
         for (const page in this.pages) {
@@ -180,6 +181,12 @@ class UIManager {
         this.timeouts.forEach(timeout => clearTimeout(timeout));
         this.timeouts.clear();
     }
+    adjustSizeOfBoard = () => {
+        const width = document.querySelector(".game").getBoundingClientRect().width;
+        document.querySelectorAll(".page").forEach((page) => {
+            page.style.height = `${width}px`;
+        })
+    }
 }
 class EventManager {
     constructor(app) {
@@ -190,7 +197,8 @@ class EventManager {
         this.app.ui.buttons.closeSettings.addEventListener("click", () => this.app.ui.changePage("start"))
         this.app.ui.buttons.openSettings.addEventListener("click", () => this.app.ui.changePage("settings"));
         this.app.ui.board.addEventListener("click", this.boardHandler.bind(this));
-        this.app.ui.pages.settings.addEventListener("change", this.optionHandler.bind(this))
+        this.app.ui.pages.settings.addEventListener("change", this.optionHandler.bind(this));
+        window.addEventListener('resize', this.app.ui.adjustSizeOfBoard);
     }
     boardHandler = (e) => {
         const field = e.target.closest(".field");
@@ -238,5 +246,6 @@ class EventManager {
             }
         }
     }
+
 }
 const visual = new VisualMemoryGame();

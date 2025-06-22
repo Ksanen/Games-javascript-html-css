@@ -18,20 +18,15 @@ body {
     align-items: center;
 }
 
-.game_info {
-    flex-grow: 1;
+.game__info {
+    height: 50px;
     padding: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.game_buttons {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    padding: 5px;
-}
+
 
 .btn {
     padding: 0.5rem;
@@ -117,8 +112,7 @@ body {
 }
 
 .game {
-    width: 500px;
-    height: 500px;
+    width: clamp(200px, 80%, 500px);
     border: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -127,15 +121,14 @@ body {
 }
 
 
-.game_board,
+.game__board,
 .board {
     display: grid;
 }
 
 
-.game_board {
+.game__board {
     flex-grow: 1;
-    height: 350px;
     border-radius: 12px;
     padding: 10px;
     gap: 10px;
@@ -158,7 +151,7 @@ body {
     grid-template-rows: 1fr 1fr 1fr;
 }
 
-.start_header {
+.start__header {
     text-align: center;
 }
 
@@ -185,17 +178,21 @@ body {
 
 .page {
     padding: 10px;
-    height: 450px;
+    /*height:450px*/
 }
 
 .page--invisible {
     display: none;
 }
 
-.game_buttons {
+.game__buttons {
+    display: flex;
+    justify-content: center;
     background-color: gray;
-    flex-grow: 1;
     align-items: center;
+    gap: 5px;
+    padding: 5px;
+    height: 50px;
 }
 
 .settings-option {
