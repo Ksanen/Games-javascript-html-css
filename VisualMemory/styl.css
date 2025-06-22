@@ -20,10 +20,29 @@ body {
     background-color: #D4F1F4;
 }
 
+.heart {
+    fill: red;
+    width: 30px;
+    height: 20px;
+}
 
+.info {
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+    display: none;
+}
+
+.info--show {
+    display: block;
+}
+
+.heart--none {
+    fill: gray;
+}
 
 .game__info {
-    height: 50px;
+    min-height: 50px;
     padding: 5px;
     display: flex;
     justify-content: space-between;
@@ -109,9 +128,6 @@ body {
     flex-direction: column;
 }
 
-[page="game"].game--lose {
-    background-color: red;
-}
 
 [page="settings"] {
     overflow: auto;
