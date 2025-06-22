@@ -49,7 +49,8 @@ body {
     pointer-events: none;
 }
 
-.btn--start {
+.btn--start,
+.btn--start:active {
     background-color: rgb(69, 203, 69);
     width: 100px;
     align-self: center;
@@ -59,7 +60,8 @@ body {
     background-color: rgb(57, 170, 57);
 }
 
-.btn--next {
+.btn--next,
+.btn--next:active {
     background-color: blue;
 }
 
@@ -67,7 +69,8 @@ body {
     background-color: rgb(33, 33, 239);
 }
 
-.btn--reset {
+.btn--reset,
+.btn--reset:active {
     background-color: black;
 }
 
@@ -75,7 +78,8 @@ body {
     background-color: rgb(41, 40, 40);
 }
 
-.btn--settings {
+.btn--settings,
+.btn--settings:active {
     background-color: green;
 }
 
@@ -83,7 +87,14 @@ body {
     background-color: rgb(41, 205, 41);
 }
 
+.btn--close-settings {
+    background-color: brown;
+}
 
+
+.btn--close-settings:hover {
+    background-color: rgb(219, 93, 93);
+}
 
 [page="start"] {
     display: flex;
@@ -199,4 +210,11 @@ body {
     border: none;
     outline: 1px solid green;
     padding: 5px;
+}
+
+.settings__buttons {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
 }

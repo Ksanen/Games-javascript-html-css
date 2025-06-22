@@ -43,51 +43,54 @@
             <div class="settings-option">
                 <div class="settings-option__name">rozmiar planszy</div>
                 <div class="settings-option__value">
-                    <select class="settings-option__select">
-                        <option>3x3</option>
-                        <option>4x4</option>
-                        <option>5x5</option>
-                        <option>6x6</option>
-                        <option>7x7</option>
+                    <select class="settings-option__select" name="sizeOfBoard" option="sizeOfBoard">
+                        <option value="3">3x3</option>
+                        <option value="4">4x4</option>
+                        <option value="5">5x5</option>
+                        <option calue="6">6x6</option>
+                        <option value="7">7x7</option>
                     </select>
                 </div>
             </div>
             <div class="settings-option">
                 <div class="settings-option__name">Liczba żyć</div>
                 <div class="settings-option__value">
-                    <select class="settings-option__select">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
+                    <select class="settings-option__select" name="hearts" option="hearts">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
                     </select>
                 </div>
             </div>
             <div class="settings-option">
                 <div class="settings-option__name">Liczba pól do zaznaczenia</div>
                 <div class="settings-option__value">
-                    <select class="settings-option__select">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
+                    <select class="settings-option__select" name="numberOfFields" option="numberOfFields">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
                     </select>
                 </div>
             </div>
             <div class="settings-option">
                 <div class="settings-option__name">Dynamiczne zwiększanie trudności</div>
                 <div class="settings-option__value">
-                    <select class="settings-option__select">
-                        <option>Tak</option>
-                        <option>Nie</option>
+                    <select class="settings-option__select" name="increaseDifficulty" option="increaseDifficulty">
+                        <option value="1">Tak</option>
+                        <option value="0">Nie</option>
                     </select>
                 </div>
+            </div>
+            <div class="settings__buttons">
+                <input type="button" value="close settings" class="btn btn--close-settings">
             </div>
         </div>
         <div class="game_buttons">

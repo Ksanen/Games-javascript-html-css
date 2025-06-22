@@ -9,13 +9,12 @@ class VisualMemoryGame {
         }
         this.ui = new UIManager(this);
         this.event = new EventManager(this);
-        this.round = 0;
+        this.round = 1;
         this.hearts = 3;
         this.numberOfFieldsToSelect = 3;
-        this.numberOfColumns = 5;
-        this.numberOfRows = 5;
-        this.ui.upgradeHeartsCounter();
-        this.ui.upgradeRoundCounter();
+        this.numberOfColumns = 3;
+        this.numberOfRows = 3;
+        this.increaseDifficultyBoolean = true;
     }
     prepareBoard() {
         this.ui.generateBoard(this.numberOfColumns, this.numberOfRows);
@@ -24,6 +23,8 @@ class VisualMemoryGame {
         this.ui.lockBoard();
     }
     startGame() {
+        this.ui.upgradeHeartsCounter();
+        this.ui.upgradeRoundCounter();
         this.prepareBoard();
         this.ui.changePage("game");
         this.ui.lockButton(this.ui.buttons.next);
@@ -32,7 +33,9 @@ class VisualMemoryGame {
     nextRound() {
         this.ui.lockButton(this.ui.buttons.next);
         this.round++;
-        this.increaseDifficulty();
+        if (this.increaseDifficultyBoolean) {
+            this.increaseDifficulty();
+        }
         this.unlockAllFields();
         this.ui.upgradeRoundCounter();
         this.prepareBoard();
@@ -94,7 +97,8 @@ class UIManager {
             start: document.querySelector(".btn--start"),
             next: document.querySelector(".btn--next"),
             reset: document.querySelector(".btn--reset"),
-            openSettings: document.querySelector(".btn--settings")
+            openSettings: document.querySelector(".btn--settings"),
+            closeSettings: document.querySelector(".btn--close-settings")
         }
         this.board = this.pages.game.querySelector(".game_board");
         this.roundCounter = document.getElementById("roundCounter");
@@ -183,8 +187,10 @@ class EventManager {
         this.app.ui.buttons.start.addEventListener("click", this.app.startGame.bind(this.app));
         this.app.ui.buttons.next.addEventListener("click", this.app.nextRound.bind(this.app));
         this.app.ui.buttons.reset.addEventListener("click", this.app.resetGame.bind(this.app));
+        this.app.ui.buttons.closeSettings.addEventListener("click", () => this.app.ui.changePage("start"))
         this.app.ui.buttons.openSettings.addEventListener("click", () => this.app.ui.changePage("settings"));
-        this.app.ui.board.addEventListener("click", this.boardHandler.bind(this))
+        this.app.ui.board.addEventListener("click", this.boardHandler.bind(this));
+        this.app.ui.pages.settings.addEventListener("change", this.optionHandler.bind(this))
     }
     boardHandler = (e) => {
         const field = e.target.closest(".field");
@@ -208,6 +214,27 @@ class EventManager {
             if (this.app.fieldsToShow.size === 0) {
                 this.app.ui.unlockButton(this.app.ui.buttons.next);
                 this.app.ui.lockBoard();
+            }
+        }
+    }
+    optionHandler = (e) => {
+        const option = e.target.closest("[option]");
+        if (option) {
+            const value = option.value;
+            switch (option.getAttribute("option")) {
+                case "sizeOfBoard":
+                    this.app.numberOfColumns = parseInt(value);
+                    this.app.numberOfRows = parseInt(value);
+                    break;
+                case "hearts":
+                    this.app.hearts = parseInt(value);
+                    break;
+                case "numberOfFields":
+                    this.app.numberOfFieldsToSelect = parseInt(value);
+                    break;
+                case "increaseDifficulty":
+                    this.app.increaseDifficultyBoolean = value === "1" ? true : false;
+                    break;
             }
         }
     }
