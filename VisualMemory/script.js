@@ -1,6 +1,5 @@
 class VisualMemoryGame {
     constructor() {
-        this.fieldsThatAreBlocked = new Set();
         this.fieldsToShow = new Set();
         this.animation = {
             showFieldDelay: 1000,
@@ -47,7 +46,6 @@ class VisualMemoryGame {
         if (this.settings.increaseDifficultyBoolean) {
             this.increaseDifficulty();
         }
-        this.unlockAllFields();
         this.prepareBoard();
         this.selectRandomFields();
         this.ui.showingFieldAnimation();
@@ -74,11 +72,7 @@ class VisualMemoryGame {
     }
     resetBoard = () => {
         this.ui.clearTimeouts();
-        this.unlockAllFields();
         document.querySelector(`.info`).classList.remove("info--show")
-    }
-    unlockAllFields() {
-        this.fieldsThatAreBlocked.clear();
     }
     selectRandomFields() {
         const area = this.settings.numberOfColumns * this.settings.numberOfRows;
@@ -137,9 +131,6 @@ class UIManager {
     }
     upgradeRoundCounter() {
         this.roundCounter.innerHTML = `Round: ${this.app.round}`;
-    }
-    selectField(field) {
-        field.classList.add("field--selected");
     }
     hidePage(page) {
         page.classList.add("page--invisible");
@@ -245,15 +236,14 @@ class EventManager {
     }
     fieldHandler = (field) => {
         const fieldNumber = field.getAttribute("field-number");
-        if (!this.app.fieldsThatAreBlocked.has(fieldNumber)) {
-            this.app.fieldsThatAreBlocked.add(fieldNumber);
+        if (!field.classList.contains("field--selected")) {
             const numberOfField = parseInt(field.getAttribute("field-number"));
             if (!this.app.fieldsToShow.has(numberOfField)) {
                 field.classList.add("field--wrong");
                 this.app.decreaseHearts();
             }
             else {
-                this.app.ui.selectField(field);
+                field.classList.add("field--selected");
                 this.app.fieldsToShow.delete(numberOfField);
             }
             if (this.app.fieldsToShow.size === 0) {
