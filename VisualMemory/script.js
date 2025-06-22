@@ -30,9 +30,6 @@ class VisualMemoryGame {
         this.ui.generateHearts();
         this.ui.upgradeHearts();
         this.ui.upgradeRoundCounter();
-        this.selectRandomFields();
-        this.ui.showingFieldAnimation();
-        this.ui.lockBoard();
     }
     startGame() {
         this.prepareBoard();
@@ -40,6 +37,9 @@ class VisualMemoryGame {
         this.ui.unlockButton(this.ui.buttons.stop);
         this.ui.lockButton(this.ui.buttons.next);
         this.ui.lockButton(this.ui.buttons.openSettings);
+        this.selectRandomFields();
+        this.ui.showingFieldAnimation();
+        this.ui.lockBoard();
     }
     nextRound() {
         this.ui.lockButton(this.ui.buttons.next);
@@ -49,6 +49,9 @@ class VisualMemoryGame {
         }
         this.unlockAllFields();
         this.prepareBoard();
+        this.selectRandomFields();
+        this.ui.showingFieldAnimation();
+        this.ui.lockBoard();
     }
     increaseDifficulty() {
         if (this.round % 3 == 0) {
@@ -65,6 +68,7 @@ class VisualMemoryGame {
         this.ui.lockButton(this.ui.buttons.next);
         this.ui.lockButton(this.ui.buttons.stop);
         this.round = 1;
+        this.fieldsToShow.clear();
         this.resetSettings();
         this.resetBoard();
     }
