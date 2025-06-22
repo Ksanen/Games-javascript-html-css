@@ -69,10 +69,10 @@ class VisualMemoryGame {
         this.resetBoard();
     }
     resetBoard = () => {
+        this.ui.clearTimeouts();
         this.ui.upgradeHeartsCounter();
         this.ui.upgradeRoundCounter();
         this.unlockAllFields();
-        this.ui.clearTimeouts();
         document.querySelector(`[page="game"]`).classList.remove("game--lose")
     }
     unlockAllFields() {
