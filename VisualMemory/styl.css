@@ -113,6 +113,10 @@ body {
     background-color: red;
 }
 
+[page="settings"] {
+    overflow: auto;
+}
+
 .game {
     width: clamp(200px, 80%, 500px);
     border: 1px solid black;

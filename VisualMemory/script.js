@@ -9,13 +9,20 @@ class VisualMemoryGame {
         }
         this.ui = new UIManager(this);
         this.event = new EventManager(this);
-        this.settings = {
+        this.defaultSettings = {
             hearts: 3,
             numberOfFieldsToSelect: 3,
             numberOfRows: 3,
             numberOfColumns: 3,
             increaseDifficultyBoolean: true
-        }
+        };
+        this.settings = {
+            hearts: this.defaultSettings.hearts,
+            numberOfFieldsToSelect: this.defaultSettings.numberOfFieldsToSelect,
+            numberOfRows: this.defaultSettings.numberOfRows,
+            numberOfColumns: this.defaultSettings.numberOfColumns,
+            increaseDifficultyBoolean: this.defaultSettings.increaseDifficultyBoolean
+        };
         this.round = 1;
     }
     prepareBoard() {
@@ -58,7 +65,7 @@ class VisualMemoryGame {
         this.ui.lockButton(this.ui.buttons.next);
         this.ui.lockButton(this.ui.buttons.stop);
         this.round = 1;
-        this.settings.hearts = 3;
+        this.resetSettings();
         this.resetBoard();
     }
     resetBoard = () => {
@@ -85,6 +92,12 @@ class VisualMemoryGame {
             this.ui.lockBoard();
             document.querySelector(`[page="game"]`).classList.add("game--lose")
         }
+    }
+    resetSettings() {
+        this.settings.hearts = this.defaultSettings.hearts;
+        this.settings.numberOfFieldsToSelect = this.defaultSettings.numberOfFieldsToSelect;
+        this.settings.numberOfRows = this.defaultSettings.numberOfRows;
+        this.settings.numberOfColumns = this.defaultSettings.numberOfColumns;
     }
 
 }
@@ -236,19 +249,20 @@ class EventManager {
             const value = option.value;
             switch (option.getAttribute("option")) {
                 case "sizeOfBoard":
-                    this.app.settings.numberOfColumns = parseInt(value);
-                    this.app.settings.numberOfRows = parseInt(value);
+                    this.app.defaultSettings.numberOfColumns = parseInt(value);
+                    this.app.defaultSettings.numberOfRows = parseInt(value);
                     break;
                 case "hearts":
-                    this.app.settings.hearts = parseInt(value);
+                    this.app.defaultSettings.hearts = parseInt(value);
                     break;
                 case "numberOfFields":
-                    this.app.settings.numberOfFieldsToSelect = parseInt(value);
+                    this.app.defaultSettings.numberOfFieldsToSelect = parseInt(value);
                     break;
                 case "increaseDifficulty":
-                    this.app.settings.increaseDifficultyBoolean = value === "1" ? true : false;
+                    this.app.defaultSettings.increaseDifficultyBoolean = value === "1" ? true : false;
                     break;
             }
+            this.app.resetSettings();
         }
     }
 
