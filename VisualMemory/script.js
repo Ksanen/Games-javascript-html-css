@@ -9,15 +9,17 @@ class VisualMemoryGame {
         }
         this.ui = new UIManager(this);
         this.event = new EventManager(this);
+        this.settings = {
+            hearts: 3,
+            numberOfFieldsToSelect: 3,
+            numberOfRows: 3,
+            numberOfColumns: 3,
+            increaseDifficultyBoolean: true
+        }
         this.round = 1;
-        this.hearts = 3;
-        this.numberOfFieldsToSelect = 3;
-        this.numberOfColumns = 3;
-        this.numberOfRows = 3;
-        this.increaseDifficultyBoolean = true;
     }
     prepareBoard() {
-        this.ui.generateBoard(this.numberOfColumns, this.numberOfRows);
+        this.ui.generateBoard(this.settings.numberOfColumns, this.settings.numberOfRows);
         this.selectRandomFields();
         this.ui.showingFieldAnimation();
         this.ui.lockBoard();
@@ -34,7 +36,7 @@ class VisualMemoryGame {
     nextRound() {
         this.ui.lockButton(this.ui.buttons.next);
         this.round++;
-        if (this.increaseDifficultyBoolean) {
+        if (this.settings.increaseDifficultyBoolean) {
             this.increaseDifficulty();
         }
         this.unlockAllFields();
@@ -43,8 +45,8 @@ class VisualMemoryGame {
     }
     increaseDifficulty() {
         if (this.round % 3 == 0) {
-            this.numberOfColumns++
-            this.numberOfRows++;
+            this.settings.numberOfColumns++
+            this.settings.numberOfRows++;
         }
         if (this.round % 2 == 0) {
             this.numberOfFieldsToSelect += 2;
@@ -55,8 +57,8 @@ class VisualMemoryGame {
         this.ui.unlockButton(this.ui.buttons.openSettings);
         this.ui.lockButton(this.ui.buttons.next);
         this.ui.lockButton(this.ui.buttons.stop);
-        this.round = 0;
-        this.hearts = 3;
+        this.round = 1;
+        this.settings.hearts = 3;
         this.resetBoard();
     }
     resetBoard = () => {
@@ -70,16 +72,16 @@ class VisualMemoryGame {
         this.fieldsThatAreBlocked.clear();
     }
     selectRandomFields() {
-        const area = this.numberOfColumns * this.numberOfRows;
-        while (this.fieldsToShow.size < this.numberOfFieldsToSelect) {
+        const area = this.settings.numberOfColumns * this.settings.numberOfRows;
+        while (this.fieldsToShow.size < this.settings.numberOfFieldsToSelect) {
             let randomNumber = Math.floor(Math.random() * area);
             this.fieldsToShow.add(randomNumber);
         }
     }
     decreaseHearts() {
-        this.hearts--;
+        this.settings.hearts--;
         this.ui.upgradeHeartsCounter();
-        if (this.hearts === 0) {
+        if (this.settings.hearts === 0) {
             this.ui.lockBoard();
             document.querySelector(`[page="game"]`).classList.add("game--lose")
         }
@@ -122,7 +124,7 @@ class UIManager {
         this.roundCounter.innerHTML = `Round: ${this.app.round}`;
     }
     upgradeHeartsCounter() {
-        this.hearts.innerHTML = `Hearts: ${this.app.hearts}`;
+        this.hearts.innerHTML = `Hearts: ${this.app.settings.hearts}`;
     }
     selectField(field) {
         field.classList.add("field--selected");
@@ -234,17 +236,17 @@ class EventManager {
             const value = option.value;
             switch (option.getAttribute("option")) {
                 case "sizeOfBoard":
-                    this.app.numberOfColumns = parseInt(value);
-                    this.app.numberOfRows = parseInt(value);
+                    this.app.settings.numberOfColumns = parseInt(value);
+                    this.app.settings.numberOfRows = parseInt(value);
                     break;
                 case "hearts":
-                    this.app.hearts = parseInt(value);
+                    this.app.settings.hearts = parseInt(value);
                     break;
                 case "numberOfFields":
-                    this.app.numberOfFieldsToSelect = parseInt(value);
+                    this.app.settings.numberOfFieldsToSelect = parseInt(value);
                     break;
                 case "increaseDifficulty":
-                    this.app.increaseDifficultyBoolean = value === "1" ? true : false;
+                    this.app.settings.increaseDifficultyBoolean = value === "1" ? true : false;
                     break;
             }
         }
