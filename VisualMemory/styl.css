@@ -69,12 +69,12 @@ body {
     background-color: rgb(33, 33, 239);
 }
 
-.btn--reset,
-.btn--reset:active {
+.btn--stop,
+.btn--stop:active {
     background-color: black;
 }
 
-.btn--reset:hover {
+.btn--stop:hover {
     background-color: rgb(41, 40, 40);
 }
 

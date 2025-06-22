@@ -96,7 +96,7 @@ class UIManager {
         this.buttons = {
             start: document.querySelector(".btn--start"),
             next: document.querySelector(".btn--next"),
-            reset: document.querySelector(".btn--reset"),
+            stop: document.querySelector(".btn--stop"),
             openSettings: document.querySelector(".btn--settings"),
             closeSettings: document.querySelector(".btn--close-settings")
         }
@@ -186,7 +186,7 @@ class EventManager {
         this.app = app;
         this.app.ui.buttons.start.addEventListener("click", this.app.startGame.bind(this.app));
         this.app.ui.buttons.next.addEventListener("click", this.app.nextRound.bind(this.app));
-        this.app.ui.buttons.reset.addEventListener("click", this.app.resetGame.bind(this.app));
+        this.app.ui.buttons.stop.addEventListener("click", this.app.resetGame.bind(this.app));
         this.app.ui.buttons.closeSettings.addEventListener("click", () => this.app.ui.changePage("start"))
         this.app.ui.buttons.openSettings.addEventListener("click", () => this.app.ui.changePage("settings"));
         this.app.ui.board.addEventListener("click", this.boardHandler.bind(this));
