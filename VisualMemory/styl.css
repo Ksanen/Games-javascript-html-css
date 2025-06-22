@@ -18,6 +18,8 @@ body {
     align-items: center;
 }
 
+
+
 .game__info {
     height: 50px;
     padding: 5px;
@@ -220,5 +222,13 @@ body {
     .board {
         height: 75px;
         width: 75px;
+    }
+
+    .start__header {
+        font-size: 20px;
+    }
+
+    .start__text {
+        font-size: 15px;
     }
 }

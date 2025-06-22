@@ -184,7 +184,8 @@ class UIManager {
         this.timeouts.clear();
     }
     adjustSizeOfBoard = () => {
-        const width = document.querySelector(".game").getBoundingClientRect().width;
+        let width = document.querySelector(".game").getBoundingClientRect().width;
+        width -= 50;
         document.querySelectorAll(".page").forEach((page) => {
             page.style.height = `${width}px`;
         })
