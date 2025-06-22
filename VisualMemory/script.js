@@ -27,6 +27,7 @@ class VisualMemoryGame {
         this.ui.upgradeRoundCounter();
         this.prepareBoard();
         this.ui.changePage("game");
+        this.ui.unlockButton(this.ui.buttons.stop);
         this.ui.lockButton(this.ui.buttons.next);
         this.ui.lockButton(this.ui.buttons.openSettings);
     }
@@ -53,6 +54,7 @@ class VisualMemoryGame {
         this.ui.changePage("start");
         this.ui.unlockButton(this.ui.buttons.openSettings);
         this.ui.lockButton(this.ui.buttons.next);
+        this.ui.lockButton(this.ui.buttons.stop);
         this.round = 0;
         this.hearts = 3;
         this.resetBoard();
