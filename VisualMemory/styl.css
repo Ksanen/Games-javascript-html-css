@@ -143,8 +143,8 @@ body {
     padding: 5px;
     background-color: var(--gameBgColor);
     gap: 5px;
-    width: 150px;
     height: 150px;
+    width: 150px;
     border: 1px solid black;
     margin: 0 auto;
     grid-template-columns: 1fr 1fr 1fr;
@@ -214,4 +214,11 @@ body {
     justify-content: center;
     align-items: center;
     padding: 10px;
+}
+
+@media only screen and (max-width:400px) {
+    .board {
+        height: 75px;
+        width: 75px;
+    }
 }
